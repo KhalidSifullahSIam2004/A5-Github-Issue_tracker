@@ -1,10 +1,5 @@
 const loadAllIssues = async() => {
-    document.getElementById('allBtn').classList.add('btn-active');
-    document.getElementById('allBtn').classList.remove('btn-inactive');
-    document.getElementById('openBtn').classList.remove('btn-active');
-    document.getElementById('openBtn').classList.add('btn-inactive');
-    document.getElementById('closeBtn').classList.remove('btn-active');
-    document.getElementById('closeBtn').classList.add('btn-inactive');
+ showAllBtnActive();
 
   showSpinner();
   const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
@@ -56,14 +51,7 @@ const displayAllIssues = (data) => {
 
 
 const loadOpenIssues = async() => {
-    document.getElementById('allBtn').classList.remove('btn-active');
-    document.getElementById('allBtn').classList.add('btn-inactive');
-    
-    document.getElementById('closeBtn').classList.remove('btn-active');
-    document.getElementById('closeBtn').classList.add('btn-inactive');
-
-    document.getElementById('openBtn').classList.remove('btn-inactive');
-    document.getElementById('openBtn').classList.add('btn-active');
+    showOpenBtnActive();
 
     showSpinner();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
@@ -111,12 +99,8 @@ const showOpenIssues = (openData) => {
 };
 
 const loadClosedIssues = async() => {
-     document.getElementById('allBtn').classList.remove('btn-active');
-    document.getElementById('allBtn').classList.add('btn-inactive');
-    document.getElementById('openBtn').classList.remove('btn-active');
-    document.getElementById('openBtn').classList.add('btn-inactive');
-    document.getElementById('closeBtn').classList.remove('btn-inactive');
-    document.getElementById('closeBtn').classList.add('btn-active');
+    showClosedBtnActive();
+    
     showSpinner();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const object = await res.json();
@@ -169,12 +153,32 @@ const hideSpinner = () => {
 }
 
 
-
+const showAllBtnActive = () => {
+    document.getElementById('allBtn').classList.add('btn-active');
+    document.getElementById('allBtn').classList.remove('btn-inactive');
+    document.getElementById('openBtn').classList.remove('btn-active');
+    document.getElementById('openBtn').classList.add('btn-inactive');
+    document.getElementById('closeBtn').classList.remove('btn-active');
+    document.getElementById('closeBtn').classList.add('btn-inactive');
+}
 
    
+const showOpenBtnActive = () => {
+    document.getElementById('allBtn').classList.remove('btn-active');
+    document.getElementById('allBtn').classList.add('btn-inactive');
+    document.getElementById('openBtn').classList.add('btn-active');
+    document.getElementById('openBtn').classList.remove('btn-inactive');
+    document.getElementById('closeBtn').classList.remove('btn-active');
+    document.getElementById('closeBtn').classList.add('btn-inactive');
+}
 
-
-
-
+const showClosedBtnActive = () => {
+     document.getElementById('allBtn').classList.remove('btn-active');
+    document.getElementById('allBtn').classList.add('btn-inactive');
+    document.getElementById('openBtn').classList.remove('btn-active');
+    document.getElementById('openBtn').classList.add('btn-inactive');
+    document.getElementById('closeBtn').classList.remove('btn-inactive');
+    document.getElementById('closeBtn').classList.add('btn-active');
+}
 
 loadAllIssues()
