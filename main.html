@@ -34,7 +34,7 @@
     <section class="mb-15">
         <div class="navbar bg-base-100 shadow-sm flex justify-between px-20">
 
-            <div class="flex gap-1">
+            <div class="flex gap-1 items-center">
                 <img
                 src="./assets/github-logo.png"
                 alt="github-logo-image"
@@ -47,7 +47,7 @@
             </div>
             
   <div class="flex gap-2">
-    <input type="text" placeholder="Search issues" class="input input-bordered w-24 md:w-auto" />
+    <input type="text" placeholder="Search issues" class="input input-bordered w-24 md:w-auto" id="search"/>
     <button class="btn btn-primary font-serif">+New Issue</button>
   </div>
 
@@ -57,16 +57,16 @@
     <!-- buttons section -->
      <section class="mb-4">
         <div class="navbar bg-base-100 shadow-lg border border-[#ffffffFF] rounded-lg w-10/12 mx-auto p-6 space-x-2">
-  <a class="btn  btn-primary font-medium ">All</a>
-  <a class="btn btn-soft text-[#64748bFF] btn-primary font-medium hover:text-white">open</a>
-  <a class="btn btn-soft text-[#64748bFF] btn-primary font-medium hover:text-white">close</a>
+  <a id="allBtn" class="btn font-medium filter-btn filter-btn-active" onclick="loadAllIssues()">All</a>
+  <a id="openBtn" class="btn font-medium filter-btn filter-btn-inactive" onclick="loadOpenIssues()">open</a>
+  <a id="closeBtn" class="btn font-medium filter-btn filter-btn-inactive" onclick="loadClosedIssues()">close</a>
 </div>
      </section>
 
 
     <!-- issues section -->
 <section class="mb-6">
-  <div class="navbar bg-base-100 shadow-lg border border-[#ffffffFF] rounded-lg w-10/12 mx-auto p-6 flex justify-between items-center">
+  <div class="navbar bg-base-100 shadow-lg border border-[#ffffffFF] rounded-lg w-10/12 mx-auto p-6 flex justify-between items-center gap-6 md:grid-cols-2">
 
     <!-- left side -->
     <div class="flex gap-2 items-center">
@@ -74,7 +74,7 @@
         <img src="./assets/Aperture.png" alt="">
       </div>
       <div>
-        <h2 class="text-[#1f2937FF] text-xl font-semibold">50 Issues</h2>
+        <h2 class="text-[#1f2937FF] text-xl font-semibold"> <span id="total">0</span> Issues</h2>
         <p class="text-[#64748bFF]">Track and manage your project issues</p>
       </div>
     </div>
@@ -94,7 +94,15 @@
 
   </div>
 </section>
-  
+
+
+<!-- all issues section -->
+ <section id="allIssues" class="w-10/12 mx-auto grid grid-cols-4 grid-width-full gap-6">
+ <div class="col-span-4 flex justify-center items-center">
+   <span id="spinner" class="loading loading-spinner loading-xl "></span>
+ </div>
+ 
+  </section>
 
 
     <script src="./script/main.js"></script>
