@@ -1,17 +1,20 @@
-const loadAllIssues = async() => {
- showAllBtnActive();
+const loadAllIssues = async () => {
+    showAllBtnActive();
 
-  showSpinner();
-  const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
-  const object = await res.json();
-  const data = object.data;
-  document.getElementById('total').innerText = data.length;
-  displayAllIssues(data);
+    showSpinner();
+    const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
+    const object = await res.json();
+    const data = object.data;
+    document.getElementById('total').innerText = data.length;
+    displayAllIssues(data);
 };
 
 const displayAllIssues = (data) => {
+    const allIssuesContainer = document.getElementById('allIssues');
+    allIssuesContainer.innerHTML = '';
+
     data.forEach(singleData => {
-        document.getElementById('allIssues').innerHTML += `
+        allIssuesContainer.innerHTML += `
             <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3">
                 <div class="flex justify-between">
                     <img src="./assets/Open-Status.png" alt="" srcset="">
@@ -36,21 +39,19 @@ const displayAllIssues = (data) => {
                 </div>
             </div>
         `;
-        if(singleData.status === 'open') {
+        if (singleData.status === 'open') {
             document.getElementById(`${singleData.id}`).classList.add('border-t-4', 'border-t-green-600');
         }
-        else{
+        else {
             document.getElementById(`${singleData.id}`).classList.add('border-t-4', 'border-t-purple-600');
         }
-        hideSpinner();
     });
 
-
+    hideSpinner();
 }
 
 
-
-const loadOpenIssues = async() => {
+const loadOpenIssues = async () => {
     showOpenBtnActive();
 
     showSpinner();
@@ -61,7 +62,6 @@ const loadOpenIssues = async() => {
     document.getElementById('total').innerText = openData.length;
     showOpenIssues(openData);
 };
-
 
 
 const showOpenIssues = (openData) => {
@@ -93,14 +93,14 @@ const showOpenIssues = (openData) => {
                     </div>
                     `;
         document.getElementById(`${singleData.id}`).classList.add('border-t-4', 'border-t-green-600');
-                })
-                
-          hideSpinner();      
+    })
+
+    hideSpinner();
 };
 
-const loadClosedIssues = async() => {
+const loadClosedIssues = async () => {
     showClosedBtnActive();
-    
+
     showSpinner();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const object = await res.json();
@@ -139,17 +139,23 @@ const showClosedIssues = (closeData) => {
                     </div>
                     `;
         document.getElementById(`${singleData.id}`).classList.add('border-t-4', 'border-t-purple-600');
-                })
-           hideSpinner();     
+    })
+    hideSpinner();
 };
 
 
 const showSpinner = () => {
-    document.getElementById('spinner').classList.remove('hidden');
+    const spinner = document.getElementById('spinner');
+    if (spinner) {
+        spinner.classList.remove('hidden');
+    }
 }
 
 const hideSpinner = () => {
-    document.getElementById('spinner').classList.add('hidden');
+    const spinner = document.getElementById('spinner');
+    if (spinner) {
+        spinner.classList.add('hidden');
+    }
 }
 
 
@@ -162,7 +168,7 @@ const showAllBtnActive = () => {
     document.getElementById('closeBtn').classList.add('btn-inactive');
 }
 
-   
+
 const showOpenBtnActive = () => {
     document.getElementById('allBtn').classList.remove('btn-active');
     document.getElementById('allBtn').classList.add('btn-inactive');
@@ -173,7 +179,7 @@ const showOpenBtnActive = () => {
 }
 
 const showClosedBtnActive = () => {
-     document.getElementById('allBtn').classList.remove('btn-active');
+    document.getElementById('allBtn').classList.remove('btn-active');
     document.getElementById('allBtn').classList.add('btn-inactive');
     document.getElementById('openBtn').classList.remove('btn-active');
     document.getElementById('openBtn').classList.add('btn-inactive');
@@ -181,4 +187,4 @@ const showClosedBtnActive = () => {
     document.getElementById('closeBtn').classList.add('btn-active');
 }
 
-loadAllIssues()
+loadAllIssues();
