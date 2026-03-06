@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- daisyUI and tailwindcss CDN links -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@5"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font awesome CDN link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Google Font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Css link -->
+    <link rel="stylesheet" href="./style/index.css" />
+
+    <style>
+      * {
+        font-family: "Geist", sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <section
+      class="w-[520px] rounded-lg border border-[#ffffffFF] shadow-lg shadow-[#00000014] mx-auto"
+    >
+      <div class="my-21 grid justify-center gap-6">
+        <img
+          src="./assets/github-logo.png"
+          alt="github-logo-image"
+          srcset=""
+          class="mx-auto"
+        />
+
+        <div>
+          <h2 class="text-2xl font-semibold text-[#1f2937FF] text-center">
+            GitHub Issues Tracker
+          </h2>
+          <p class="text-[#64748bFF] text-center">
+            Sign in to manage your issues
+          </p>
+        </div>
+
+        <div class="space-y-2">
+          <label for="username" class="font-medium text-[#1f2937FF]"
+            >Username</label
+          >
+          <input
+            type="text"
+            id="username"
+            class="input"
+            placeholder="Enter Username"
+            value="admin"
+          />
+          <h3 class="text-[#4a00ffFF]">Default: admin</h3>
+          <label for="password" class="font-medium text-[#1f2937FF]"
+            >Password</label
+          >
+          <input
+            type="password"
+            id="password"
+            class="input"
+            placeholder="Enter Password"
+            value="admin123"
+          />
+          <h3 class="text-[#4a00ffFF]">Default: admin123</h3>
+          <button id="signInBtn" class="btn btn-primary w-full">Sign In</button>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <hr class="flex-grow border-gray-300" />
+          <span class="text-gray-500 font-medium">OR</span>
+          <hr class="flex-grow border-gray-300" />
+        </div>
+
+        <div class="text-center space-y-1">
+          <h1 class="text-[#64748bFF]">Demo Credentials:</h1>
+
+          <div class="bg-[#f8fafcFF] p-4 rounded-md">
+            <p class="text-[#1f2937FF]">Username: admin</p>
+            <p class="text-[#1f2937FF]">Password: admin123</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="./script/index.js"></script>
+  </body>
+</html>
