@@ -15,7 +15,7 @@ const displayAllIssues = (data) => {
 
     data.forEach(singleData => {
         allIssuesContainer.innerHTML += `
-            <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
+            <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 w-full space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
                 <div class="flex justify-between">
                     <img src="./assets/Open-Status.png" alt="" srcset="">
                     <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
@@ -68,7 +68,7 @@ const showOpenIssues = (openData) => {
     document.getElementById('issueList').innerHTML = '';
     openData.forEach(singleData => {
         document.getElementById('issueList').innerHTML += `
-        <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
+        <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 w-full space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
         <div class="flex justify-between">
         <img src="./assets/Open-Status.png" alt="" srcset="">
         <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
@@ -114,7 +114,7 @@ const showClosedIssues = (closeData) => {
     document.getElementById('issueList').innerHTML = '';
     closeData.forEach(singleData => {
         document.getElementById('issueList').innerHTML += `
-        <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
+        <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 w-full space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
         <div class="flex justify-between">
         <img src="./assets/Open-Status.png" alt="" srcset="">
         <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
@@ -233,7 +233,7 @@ const showSearchIssues = (data, searchInputValue) => {
 
     searchedData.forEach(singleData => {
         allIssuesContainer.innerHTML += `
-            <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
+            <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 w-full space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
                 <div class="flex justify-between">
                     <img src="./assets/Open-Status.png" alt="" srcset="">
                     <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
