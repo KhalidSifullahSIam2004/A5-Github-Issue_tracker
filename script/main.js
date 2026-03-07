@@ -199,6 +199,7 @@ const showModal = (data) => {
 }
 
 const loadSearchIssues = async () => {
+    inactiveAllBtns();
     const searchInputValue = document.getElementById('searchInputValue').value.trim().toLowerCase();
 
        if (!searchInputValue) {
@@ -219,7 +220,11 @@ const loadSearchIssues = async () => {
 
 const showSearchIssues = (data, searchInputValue) => {
 
-    const searchedData = data.filter(singleData => singleData.description.trim().toLowerCase().includes(searchInputValue));
+    const searchWords = searchInputValue.split(' ').filter(word => word);
+    const searchedData = data.filter(singleData => {
+        const descriptionText = singleData.description ? singleData.description.toLowerCase() : '';
+        return searchWords.every(word => descriptionText.includes(word));
+    });
 
 
     document.getElementById('total').innerText = searchedData.length;
@@ -252,6 +257,12 @@ const showSearchIssues = (data, searchInputValue) => {
                 </div>
             </div>
         `;
+           
+        if (singleData.status === 'open') {
+            document.getElementById(`${singleData.id}`).classList.add('border-t-4', 'border-t-green-600');
+        } else {
+            document.getElementById(`${singleData.id}`).classList.add('border-t-4', 'border-t-purple-600');
+        }
     });
 
      document.getElementById('searchInputValue').value = '';
