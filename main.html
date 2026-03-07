@@ -47,8 +47,8 @@
             </div>
             
   <div class="flex gap-2">
-    <input type="text" placeholder="Search issues" class="input input-bordered w-24 md:w-auto" id="search"/>
-    <button class="btn btn-primary font-serif">Search</button>
+    <input type="text" placeholder="Search issues" class="input input-bordered w-24 md:w-auto" id="searchInputValue"/>
+    <button onclick="loadSearchIssues()" class="btn btn-primary font-serif">Search</button>
   </div>
 
 </div>
@@ -97,12 +97,12 @@
 
 
 <!-- all issues section -->
- <section id="allIssues" class="w-10/12 mx-auto grid grid-cols-4 grid-width-full gap-6">
- <div class="col-span-full flex justify-center items-center">
-   <span id="spinner" class="loading loading-spinner loading-xl hidden "></span>
- </div>
- 
-  </section>
+ <section id="allIssues" class="w-10/12 mx-auto">
+  <div class="flex justify-center items-center mb-6">
+    <span id="spinner" class="loading loading-spinner loading-xl hidden"></span>
+  </div>
+  <div id="issueList" class="grid grid-cols-4 grid-width-full gap-6"></div>
+ </section>
 
   <!-- modal section -->
 <dialog id="modal" class="modal">
