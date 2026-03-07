@@ -1,16 +1,13 @@
-let allIssuesData = [];
-
-const loadAllIssues = async () => {
+async function loadAllIssues() {
     showAllBtnActive();
 
     showSpinner();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const object = await res.json();
     const data = object.data;
-    allIssuesData = data;
     document.getElementById('total').innerText = data.length;
     displayAllIssues(data);
-};
+}
 
 const displayAllIssues = (data) => {
     const allIssuesContainer = document.getElementById('allIssues');
@@ -54,18 +51,17 @@ const displayAllIssues = (data) => {
 }
 
 
-const loadOpenIssues = async () => {
+async function loadOpenIssues() {
     showOpenBtnActive();
 
     showSpinner();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const object = await res.json();
     const data = object.data;
-    allIssuesData = data;
     const openData = data.filter(singleOpenData => singleOpenData.status === 'open');
     document.getElementById('total').innerText = openData.length;
     showOpenIssues(openData);
-};
+}
 
 
 const showOpenIssues = (openData) => {
@@ -102,18 +98,17 @@ const showOpenIssues = (openData) => {
     hideSpinner();
 };
 
-const loadClosedIssues = async () => {
+async function loadClosedIssues() {
     showClosedBtnActive();
 
     showSpinner();
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const object = await res.json();
     const data = object.data;
-    allIssuesData = data;
     const closeData = data.filter(singleCloseData => singleCloseData.status === 'closed');
     document.getElementById('total').innerText = closeData.length;
     showClosedIssues(closeData);
-};
+}
 
 const showClosedIssues = (closeData) => {
     document.getElementById('allIssues').innerHTML = '';
@@ -148,15 +143,14 @@ const showClosedIssues = (closeData) => {
     hideSpinner();
 };
 
-const loadModal = async(id) => {
-    showClosedBtnActive();
+async function loadModal(id) {
 const  res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
 const object = await res.json();
 const data = object.data;
  showModal(data);
 }
 
-const showModal = (data) => {
+function showModal(data) {
     document.getElementById('modal').innerHTML = `
       <div class="modal-box space-y-6">
         <h3 class="text-2xl font-bold text-[#1f2937FF]">${data.title ? data.title : 'No title'}</h3>
@@ -198,8 +192,7 @@ const showModal = (data) => {
         </div>
       </div>
     `;
-
-    
+    const modal = document.getElementById('modal');
     modal.showModal();
     hideSpinner();
 
@@ -255,11 +248,5 @@ const showClosedBtnActive = () => {
     closeBtn.classList.remove('btn-inactive');
     closeBtn.classList.add('btn-active');
 }
-
-window.loadAllIssues = loadAllIssues;
-window.loadOpenIssues = loadOpenIssues;
-window.loadClosedIssues = loadClosedIssues;
-window.loadModal = loadModal;
-window.showModal = showModal;
 
 loadAllIssues();
