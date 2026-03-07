@@ -18,7 +18,9 @@ const displayAllIssues = (data) => {
             <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 w-full space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
                 <div class="flex justify-between">
                     <img src="./assets/Open-Status.png" alt="" srcset="">
-                    <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
+                    <div class="badge font-medium text-xs ${singleData.priority === 'high' ? 'bg-green-100 text-green-800' : singleData.priority === 'medium' ? 'bg-[#fef3c7FF] text-[#d8670b]' : 'bg-[#dbeafeFF] text-[#ff0000]'}">
+                        ${singleData.priority}
+                    </div>
                 </div>
                 <h2 class="font-semibold text-[#1f2937FF]">${singleData.title}</h2>
                 <p class="text-[#64748bFF]">${singleData.description}</p>
@@ -71,7 +73,9 @@ const showOpenIssues = (openData) => {
         <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 w-full space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
         <div class="flex justify-between">
         <img src="./assets/Open-Status.png" alt="" srcset="">
-        <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
+        <div class="badge font-medium text-xs ${singleData.priority === 'high' ? 'bg-green-100 text-green-800' : singleData.priority === 'medium' ? 'bg-[#fef3c7FF] text-[#d8670b]' : 'bg-[#dbeafeFF] text-[#ff0000]'}">
+            ${singleData.priority}
+        </div>
         </div>
         <h2 class="font-semibold text-[#1f2937FF]">${singleData.title}</h2>
         <p class="text-[#64748bFF]">${singleData.description}</p>
@@ -117,16 +121,18 @@ const showClosedIssues = (closeData) => {
         <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 w-full space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
         <div class="flex justify-between">
         <img src="./assets/Open-Status.png" alt="" srcset="">
-        <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
+        <div class="badge font-medium text-xs ${singleData.priority === 'high' ? 'bg-green-100 text-green-800' : singleData.priority === 'medium' ? 'bg-[#fef3c7FF] text-[#d8670b]' : 'bg-[#dbeafeFF] text-[#ff0000]'}">
+            ${singleData.priority}
+        </div>
         </div>
         <h2 class="font-semibold text-[#1f2937FF]">${singleData.title}</h2>
         <p class="text-[#64748bFF]">${singleData.description}</p>
         <div>
-        <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">
+        <div class="badge font-medium text-xs ${singleData.priority === 'high' ? 'bg-[#feececFF] text-green-800' : singleData.priority === 'medium' ? 'bg-[#fef3c7FF] text-[#d8670b]' : 'bg-[#dbeafeFF] text-[#ff0000]'}">
         <i class="fa-solid fa-suitcase fa-rotate-180"></i>
         ${singleData.labels[0] ? singleData.labels[0] : ''}
         </div>
-                    <div class="badge bg-[#fef3c7FF] text-[#d97706FF] font-medium text-xs">
+                    <div class="badge font-medium text-xs ${singleData.priority === 'high' ? 'bg-[#feececFF] text-green-800' : singleData.priority === 'medium' ? 'bg-[#fef3c7FF] text-[#d8670b]' : 'bg-[#dbeafeFF] text-[#ff0000]'}">
                     <i class="fa-solid fa-futbol"></i>
                     ${singleData.labels[1] ? singleData.labels[1] : ''}
                     </div>
@@ -156,7 +162,9 @@ const showModal = (data) => {
         <h3 class="text-2xl font-bold text-[#1f2937FF]">${data.title ? data.title : 'No title'}</h3>
 
         <div class="flex items-center">
-          <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${data.status ? data.status : 'unknown'}</div>
+          <div class="badge font-medium text-xs ${data.status === 'open' ? 'bg-green-100 text-green-800' : 'bg-[#feececFF] text-[#ef4444FF]'}">
+            ${data.status ? data.status : 'unknown'}
+          </div>
           <p class="text-[#64748bFF] text-xs mb-4 mr-2"><span class="font-semibold text-3xl rounded-full mr-1">.</span>${data.author ? data.author : 'Unknown'}</p>
           <p class="text-[#64748bFF] text-xs mb-4"><span class="font-semibold text-3xl rounded-full mr-1">.</span>${data.createdAt ? data.createdAt : ''}</p>
         </div>
@@ -181,7 +189,7 @@ const showModal = (data) => {
           </div>
           <div>
             <p class="text-[#64748bFF]">Priority:</p>
-            <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${data.priority ? data.priority : 'N/A'}</div>
+            <div class="badge font-medium text-xs ${data.priority === 'high' ? 'bg-green-100 text-green-800' : data.priority === 'medium' ? 'bg-[#fef3c7FF] text-[#d8670b]' : 'bg-[#dbeafeFF] text-[#ff0000]'}">${data.priority ? data.priority : 'N/A'}</div>
           </div>
         </div>
 
@@ -236,16 +244,18 @@ const showSearchIssues = (data, searchInputValue) => {
             <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 w-full space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
                 <div class="flex justify-between">
                     <img src="./assets/Open-Status.png" alt="" srcset="">
-                    <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
+                    <div class="badge font-medium text-xs ${singleData.priority === 'high' ? 'bg-green-100 text-green-800' : singleData.priority === 'medium' ? 'bg-[#fef3c7FF] text-[#d8670b]' : 'bg-[#dbeafeFF] text-[#ff0000]'}">
+                        ${singleData.priority}
+                    </div>
                 </div>
                 <h2 class="font-semibold text-[#1f2937FF]">${singleData.title}</h2>
                 <p class="text-[#64748bFF]">${singleData.description}</p>
                 <div>
-                    <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">
+                    <div class="badge font-medium text-xs ${singleData.priority === 'high' ? 'bg-green-100 text-green-800' : singleData.priority === 'medium' ? 'bg-[#fef3c7FF] text-[#d8670b]' : 'bg-[#dbeafeFF] text-[#ff0000]'}">
                         <i class="fa-solid fa-suitcase fa-rotate-180"></i>
                         ${singleData.labels[0] ? singleData.labels[0] : ''}
                     </div>
-                    <div class="badge bg-[#fef3c7FF] text-[#d97706FF] font-medium text-xs">
+                    <div class="badge font-medium text-xs ${singleData.priority === 'high' ? 'bg-green-100 text-green-800' : singleData.priority === 'medium' ? 'bg-[#fef3c7FF] text-[#d8670b]' : 'bg-[#dbeafeFF] text-[#ff0000]'}">
                         <i class="fa-solid fa-futbol"></i>
                         ${singleData.labels[1] ? singleData.labels[1] : ''}
                     </div>
