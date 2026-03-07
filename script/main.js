@@ -254,6 +254,8 @@ const showSearchIssues = (data, searchInputValue) => {
         `;
     });
 
+     document.getElementById('searchInputValue').value = '';
+
     hideSpinner();
 };
 
