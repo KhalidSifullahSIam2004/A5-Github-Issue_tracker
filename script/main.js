@@ -1,3 +1,5 @@
+let allIssuesData = [];
+
 const loadAllIssues = async () => {
     showAllBtnActive();
 
@@ -5,6 +7,7 @@ const loadAllIssues = async () => {
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const object = await res.json();
     const data = object.data;
+    allIssuesData = data;
     document.getElementById('total').innerText = data.length;
     displayAllIssues(data);
 };
@@ -15,7 +18,7 @@ const displayAllIssues = (data) => {
 
     data.forEach(singleData => {
         allIssuesContainer.innerHTML += `
-            <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3">
+            <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
                 <div class="flex justify-between">
                     <img src="./assets/Open-Status.png" alt="" srcset="">
                     <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
@@ -25,11 +28,11 @@ const displayAllIssues = (data) => {
                 <div>
                     <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">
                         <i class="fa-solid fa-suitcase fa-rotate-180"></i>
-                        ${singleData.labels[0]}
+                        ${singleData.labels[0] ? singleData.labels[0] : ''}
                     </div>
                     <div class="badge bg-[#fef3c7FF] text-[#d97706FF] font-medium text-xs">
                         <i class="fa-solid fa-futbol"></i>
-                        ${singleData.labels[1]}
+                        ${singleData.labels[1] ? singleData.labels[1] : ''}
                     </div>
                 </div>
                 <hr class="border-gray-300">
@@ -58,6 +61,7 @@ const loadOpenIssues = async () => {
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const object = await res.json();
     const data = object.data;
+    allIssuesData = data;
     const openData = data.filter(singleOpenData => singleOpenData.status === 'open');
     document.getElementById('total').innerText = openData.length;
     showOpenIssues(openData);
@@ -68,7 +72,7 @@ const showOpenIssues = (openData) => {
     document.getElementById('allIssues').innerHTML = '';
     openData.forEach(singleData => {
         document.getElementById('allIssues').innerHTML += `
-        <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3">
+        <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
         <div class="flex justify-between">
         <img src="./assets/Open-Status.png" alt="" srcset="">
         <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
@@ -78,11 +82,11 @@ const showOpenIssues = (openData) => {
         <div>
         <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">
         <i class="fa-solid fa-suitcase fa-rotate-180"></i>
-        ${singleData.labels[0]}
+        ${singleData.labels[0] ? singleData.labels[0] : ''}
         </div>
                     <div class="badge bg-[#fef3c7FF] text-[#d97706FF] font-medium text-xs">
                     <i class="fa-solid fa-futbol"></i>
-                    ${singleData.labels[1]}
+                    ${singleData.labels[1] ? singleData.labels[1] : ''}
                     </div>
                 </div>
                 <hr class="border-gray-300">
@@ -105,6 +109,7 @@ const loadClosedIssues = async () => {
     const res = await fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues');
     const object = await res.json();
     const data = object.data;
+    allIssuesData = data;
     const closeData = data.filter(singleCloseData => singleCloseData.status === 'closed');
     document.getElementById('total').innerText = closeData.length;
     showClosedIssues(closeData);
@@ -114,7 +119,7 @@ const showClosedIssues = (closeData) => {
     document.getElementById('allIssues').innerHTML = '';
     closeData.forEach(singleData => {
         document.getElementById('allIssues').innerHTML += `
-        <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3">
+        <div id="${singleData.id}" class="card bg-base-100 card-xl shadow-sm bg-base-100 border border-[#ffffffFF] rounded-lg py-6 px-4 mx-6 space-y-3 cursor-pointer" onclick="loadModal('${singleData.id}')">
         <div class="flex justify-between">
         <img src="./assets/Open-Status.png" alt="" srcset="">
         <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${singleData.priority}</div>
@@ -124,11 +129,11 @@ const showClosedIssues = (closeData) => {
         <div>
         <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">
         <i class="fa-solid fa-suitcase fa-rotate-180"></i>
-        ${singleData.labels[0]}
+        ${singleData.labels[0] ? singleData.labels[0] : ''}
         </div>
                     <div class="badge bg-[#fef3c7FF] text-[#d97706FF] font-medium text-xs">
                     <i class="fa-solid fa-futbol"></i>
-                    ${singleData.labels[1]}
+                    ${singleData.labels[1] ? singleData.labels[1] : ''}
                     </div>
                 </div>
                 <hr class="border-gray-300">
@@ -143,7 +148,62 @@ const showClosedIssues = (closeData) => {
     hideSpinner();
 };
 
+const loadModal = async(id) => {
+    showClosedBtnActive();
+const  res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`);
+const object = await res.json();
+const data = object.data;
+ showModal(data);
+}
 
+const showModal = (data) => {
+    document.getElementById('modal').innerHTML = `
+      <div class="modal-box space-y-6">
+        <h3 class="text-2xl font-bold text-[#1f2937FF]">${data.title ? data.title : 'No title'}</h3>
+
+        <div class="flex items-center">
+          <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${data.status ? data.status : 'unknown'}</div>
+          <p class="text-[#64748bFF] text-xs mb-4 mr-2"><span class="font-semibold text-3xl rounded-full mr-1">.</span>${data.author ? data.author : 'Unknown'}</p>
+          <p class="text-[#64748bFF] text-xs mb-4"><span class="font-semibold text-3xl rounded-full mr-1">.</span>${data.createdAt ? data.createdAt : ''}</p>
+        </div>
+
+        <div class="space-x-2">
+          <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">
+            <i class="fa-solid fa-suitcase fa-rotate-180"></i>
+            ${data.labels && data.labels[0] ? data.labels[0] : ''}
+          </div>
+          <div class="badge bg-[#fef3c7FF] text-[#d97706FF] font-medium text-xs">
+            <i class="fa-solid fa-futbol"></i>
+            ${data.labels && data.labels[1] ? data.labels[1] : ''}
+          </div>
+        </div>
+
+        <p class="text-[#64748bFF]">${data.description ? data.description : 'No description'}</p>
+
+        <div class="bg-gray-300 grid justify-between grid-cols-2 p-4 rounded-lg">
+          <div>
+            <p class="text-[#64748bFF]">Assignee:</p>
+            <p class="text-[#1f2937FF] font-semibold">${data.assignee ? data.assignee : (data.author ? data.author : 'Unassigned')}</p>
+          </div>
+          <div>
+            <p class="text-[#64748bFF]">Priority:</p>
+            <div class="badge bg-[#feececFF] text-[#ef4444FF] font-medium text-xs">${data.priority ? data.priority : 'N/A'}</div>
+          </div>
+        </div>
+
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn btn-primary">Close</button>
+          </form>
+        </div>
+      </div>
+    `;
+
+    
+    modal.showModal();
+    hideSpinner();
+
+}
 const showSpinner = () => {
     const spinner = document.getElementById('spinner');
     if (spinner) {
@@ -158,33 +218,48 @@ const hideSpinner = () => {
     }
 }
 
+const allbtn = document.getElementById('allBtn');
+const openBtn = document.getElementById('openBtn');
+const closeBtn = document.getElementById('closeBtn');
 
 const showAllBtnActive = () => {
-    document.getElementById('allBtn').classList.add('btn-active');
-    document.getElementById('allBtn').classList.remove('btn-inactive');
-    document.getElementById('openBtn').classList.remove('btn-active');
-    document.getElementById('openBtn').classList.add('btn-inactive');
-    document.getElementById('closeBtn').classList.remove('btn-active');
-    document.getElementById('closeBtn').classList.add('btn-inactive');
+    allbtn.classList.add('btn-active');
+    allbtn.classList.remove('btn-inactive');
+
+    openBtn.classList.remove('btn-active');
+    openBtn.classList.add('btn-inactive');
+
+    closeBtn.classList.remove('btn-active');
+    closeBtn.classList.add('btn-inactive');
 }
 
 
 const showOpenBtnActive = () => {
-    document.getElementById('allBtn').classList.remove('btn-active');
-    document.getElementById('allBtn').classList.add('btn-inactive');
-    document.getElementById('openBtn').classList.add('btn-active');
-    document.getElementById('openBtn').classList.remove('btn-inactive');
-    document.getElementById('closeBtn').classList.remove('btn-active');
-    document.getElementById('closeBtn').classList.add('btn-inactive');
+    allbtn.classList.remove('btn-active');
+    allbtn.classList.add('btn-inactive');
+
+    openBtn.classList.add('btn-active');
+    openBtn.classList.remove('btn-inactive');
+
+    closeBtn.classList.remove('btn-active');
+    closeBtn.classList.add('btn-inactive');
 }
 
 const showClosedBtnActive = () => {
-    document.getElementById('allBtn').classList.remove('btn-active');
-    document.getElementById('allBtn').classList.add('btn-inactive');
-    document.getElementById('openBtn').classList.remove('btn-active');
-    document.getElementById('openBtn').classList.add('btn-inactive');
-    document.getElementById('closeBtn').classList.remove('btn-inactive');
-    document.getElementById('closeBtn').classList.add('btn-active');
+    allbtn.classList.remove('btn-active');
+    allbtn.classList.add('btn-inactive');
+
+    openBtn.classList.remove('btn-active');
+    openBtn.classList.add('btn-inactive');
+
+    closeBtn.classList.remove('btn-inactive');
+    closeBtn.classList.add('btn-active');
 }
+
+window.loadAllIssues = loadAllIssues;
+window.loadOpenIssues = loadOpenIssues;
+window.loadClosedIssues = loadClosedIssues;
+window.loadModal = loadModal;
+window.showModal = showModal;
 
 loadAllIssues();
